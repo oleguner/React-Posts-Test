@@ -1,3 +1,9 @@
 h1 {
   color: red;
 }
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
