@@ -24,8 +24,8 @@ export const App = () => {
   }, []);
 
   const handleClick = (page) => {
+    // console.log(page);
     setCurrentPage(page);
-    console.log(page);
   };
 
   const lastIndexPostOnThePage = currentPage * postPerPage;
@@ -37,9 +37,10 @@ export const App = () => {
       <h1>React-Posts</h1>
       <PostsList posts={displayedPosts} />
       <Pagination
-       postsPerPage={postPerPage}
-       postsLength={posts.length}
-       onClick={handleClick}
+        postsPerPage={postPerPage}
+        postsLength={posts.length}
+        onClick={handleClick}
+        page={currentPage}
       />
     </>
   )

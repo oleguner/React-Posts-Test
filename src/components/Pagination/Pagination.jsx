@@ -1,9 +1,11 @@
 import React from 'react';
+import './Pagination.css';
 
 export const Pagination = ({
   postsPerPage,
   postsLength,
-  onClick
+  onClick,
+  page
 }) => {
   const pageNumbers = [];
 
@@ -11,20 +13,49 @@ export const Pagination = ({
     pageNumbers.push(i);
   }
 
-  console.log(pageNumbers);
+  const changePage = (e) => {
+    if (e.target.name === 'left') {
+      const pageDicriment = page - 1 >= 1 ? page - 1 : 1;
+      onClick(pageDicriment);
+    } else {
+      const pageIncriment = page + 1 <= pageNumbers.length - 1
+        ? page + 1
+        : pageNumbers.length;
+      onClick(pageIncriment);
+    }
+  }
 
   return (
     <nav>
-      <ul>
-        {pageNumbers.map(number => (
-          <li key={number}>
-            <button hred="#" onClick={() => onClick(number)}>
+      <div className="pagination">
+        <button name="left" onClick={(e) => changePage(e)}>
+          &#10092;
+        </button>
+        {pageNumbers.map((number, index) => (
+          (index === 0
+            || index === page - 2
+            || index === page - 1
+            || index === page
+            || index === pageNumbers.length - 1
+          ) &&
+          <div key={number}>
+            {(number === page - 1 && page > 3) && '...'}
+            <button
+              className={number === page ? 'active' : ''}
+              onClick={() => {
+                console.log(number, ' - number');
+                console.log(page, ' - page');
+                return onClick(number)
+              }}>
               {number}
             </button>
-          </li>
-
+            {(number === page + 1 && page < pageNumbers.length - 2) && '...'}
+          </div>
         ))}
-      </ul>
+        <button name="right" onClick={(e) => changePage(e)}>
+          &#10093;
+        </button>
+      </div>
     </nav>
   );
 };

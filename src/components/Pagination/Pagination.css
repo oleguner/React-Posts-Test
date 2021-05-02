@@ -1,0 +1,15 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.active {
+  background-color: rgba(255, 0, 0, 0.555);
+}
+
+button {
+  margin: 3px;
+  padding: 5px 9px;
+  cursor: pointer;
+}
