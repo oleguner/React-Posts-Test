@@ -5,6 +5,9 @@ export const Header = () => (
   <header className="header">
     <div className="header__overlay">
       <h1 className="header__title">React-Posts</h1>
+      <span id="header__message">
+      </span>
     </div>
   </header>
 )
+

@@ -1,0 +1,20 @@
+.list__item {
+  list-style-type: none;
+  border: 1px solid #111827;
+  padding: 10px;
+  background-color: #fff;
+  font-size: 18px;
+}
+
+.list__title::first-letter {
+  text-transform: uppercase;
+}
+
+.list__body::first-letter {
+  text-transform: uppercase;
+  color: #F472B6;
+}
+
+.progress {
+  margin-top: 50px;
+}

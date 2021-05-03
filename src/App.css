@@ -6,7 +6,11 @@ html {
   color: #111827;
 }
 
-body,
+.page {
+  margin: 0;
+  background-color: #ECFEFF;
+}
+
 .root,
 main {
   display: flex;
@@ -20,10 +24,8 @@ main {
   width: 100vw;
 }
 
-
-
 main {
-  align-items: left;
-  width: 75%;
   margin: 0;
+  width: 75%;
+  align-items: left;
 }

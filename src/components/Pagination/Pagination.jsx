@@ -4,8 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   buttonStyles: {
+    backgroundColor: "#ECFEFF",
     color: "#3B82F6",
-    border:"1px solid #3B82F6",
+    border: "1px solid #3B82F6",
     width: "10px",
     minWidth: "30px",
     minHeight: "30px",
@@ -55,7 +56,7 @@ export const Pagination = ({
     }
   }
 
-  const renderArrowButton = (name, arrow, isDisable = false) => {
+  const renderArrowButton = (name, isDisable = false) => {
     if (isDisable) {
       return (
         <Button
@@ -91,9 +92,9 @@ export const Pagination = ({
       <div className="pagination">
 
         <div className="pagination__arrow">
-          {(page === 1 &&
-            renderArrowButton('left', '&#x21E6;', true)) ||
-            renderArrowButton('left', '&#x21E6;')}
+          {(pageNumbers.length > 0) && ((page === 1 &&
+            renderArrowButton('left', true)) ||
+            (renderArrowButton('left')))}
         </div>
 
         {pageNumbers.map((number, index) => (
@@ -121,9 +122,9 @@ export const Pagination = ({
         ))}
 
         <div className="pagination__arrow">
-          {(page === pageNumbers.length &&
-            renderArrowButton('right', '&laquo;', true))
-            || renderArrowButton('right', '&laquo;')}
+          {pageNumbers.length > 0 && ((page === pageNumbers.length &&
+            renderArrowButton('right', true))
+            || renderArrowButton('right'))}
         </div>
       </div>
     </nav>
