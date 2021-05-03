@@ -1,7 +1,32 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  buttonStyles: {
+    color: "#3B82F6",
+    border:"1px solid #3B82F6",
+    width: "10px",
+    minWidth: "30px",
+    minHeight: "30px",
+    "&:hover": {
+      backgroundColor: "#DBEAFE",
+    },
+  },
+  buttonActive: {
+    backgroundColor: "#F9A8D4",
+    border: "1px solid #F9A8D4",
+    color: "#3B82F6",
+    width: "10px",
+    minWidth: "30px",
+    minHeight: "30px",
+    transform: "translateY(-5px)",
+    '&:hover': {
+      backgroundColor: '#F472B6',
+      border: '1px solid #AFAFAF',
+    },
+  }
+});
 
 import './Pagination.css';
 
@@ -12,13 +37,14 @@ export const Pagination = ({
   page
 }) => {
   const pageNumbers = [];
+  const classes = useStyles();
 
   for (let i = 1; i <= Math.ceil(postsLength / postsPerPage); i++) {
     pageNumbers.push(i);
   }
 
   const changePage = (e) => {
-    if (e.target.closest('button').name === 'left') {
+    if (e.target.closest('Button').name === 'left') {
       const pageDecrease = page - 1 >= 1 ? page - 1 : 1;
       onClick(pageDecrease);
     } else {
@@ -34,35 +60,41 @@ export const Pagination = ({
       return (
         <Button
           disabled
+          className={classes.buttonStyles}
           variant="outlined"
           color="primary"
           name={name}
           onClick={(e) => changePage(e)}
-          startIcon={arrow}
         >
+          <span className={name}>&#x3009;</span>
         </Button>
+
       )
     }
 
     return (
       <Button
         variant="outlined"
+        className={classes.buttonStyles}
         color="primary"
         name={name}
         onClick={(e) => changePage(e)}
-        startIcon={arrow}
       >
+        <span className={name}>&#x3009;</span>
       </Button>
     )
   }
 
   return (
+
     <nav>
       <div className="pagination">
 
-        {(page === 1 &&
-          renderArrowButton('left', <ArrowBackIosIcon />, true)) ||
-          renderArrowButton('left', <ArrowBackIosIcon />)}
+        <div className="pagination__arrow">
+          {(page === 1 &&
+            renderArrowButton('left', '&#x21E6;', true)) ||
+            renderArrowButton('left', '&#x21E6;')}
+        </div>
 
         {pageNumbers.map((number, index) => (
           (index === 0
@@ -72,20 +104,27 @@ export const Pagination = ({
             || index === pageNumbers.length - 1
           ) &&
           <div key={number}>
-            {(number === page - 1 && page > 3) && <span>...</span>}
+            {(number === page - 1 && page > 3)
+              && <span className="dots">&nbsp;. . .&nbsp;</span>}
             <Button
+              size="small"
+              className={number === page
+                ? classes.buttonActive
+                : classes.buttonStyles}
               variant={number === page ? 'contained' : 'outlined'}
-              color={number === page ? 'secondary' : 'primary'}
               onClick={() => onClick(number)}>
               {number}
             </Button>
-            {(number === page + 1 && page < pageNumbers.length - 2) && <span>&nbsp;. . .&nbsp;</span>}
+            {(number === page + 1 && page < pageNumbers.length - 2)
+              && <span className="dots">&nbsp;. . .&nbsp;</span>}
           </div>
         ))}
-        {(page === pageNumbers.length &&
-          renderArrowButton('right', <ArrowForwardIosIcon />, true)) ||
-          renderArrowButton('right', <ArrowForwardIosIcon />)}
-          }
+
+        <div className="pagination__arrow">
+          {(page === pageNumbers.length &&
+            renderArrowButton('right', '&laquo;', true))
+            || renderArrowButton('right', '&laquo;')}
+        </div>
       </div>
     </nav>
   );

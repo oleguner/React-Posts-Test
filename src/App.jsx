@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { PostsList } from './components/PostsList/PostsList';
 import { Pagination } from './components/Pagination/Pagination';
+import { Header } from './components/Header/Header';
+import { Footer } from './components/Footer/Footer';
 import './App.css';
 
 export const App = () => {
@@ -13,7 +15,7 @@ export const App = () => {
     const posts = await fetch('https://mate-academy.github.io/phone-catalogue-static/api/phones.json').then(resp => resp.json());
     const users = await fetch('https://mate-academy.github.io/phone-catalogue-static/api/phones.json').then(resp => resp.json());
 
-    const retrieveAll = async function() {
+    const retrieveAll = async function () {
       const result = await Promise.all([posts, users]);
       console.log(result);
       setPosts(result[0]);
@@ -37,14 +39,17 @@ export const App = () => {
 
   return (
     <>
-      <h1>React-Posts</h1>
-      <PostsList posts={displayedPosts} />
-      <Pagination
-        postsPerPage={postPerPage}
-        postsLength={posts.length}
-        onClick={handleClick}
-        page={currentPage}
-      />
+      <Header />
+      <main>
+        <PostsList posts={displayedPosts} />
+        <Pagination
+          postsPerPage={postPerPage}
+          postsLength={posts.length}
+          onClick={handleClick}
+          page={currentPage}
+        />
+      </main>
+      <Footer />
     </>
   )
 }

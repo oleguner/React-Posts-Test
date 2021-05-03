@@ -1,13 +1,37 @@
 .pagination {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  position: fixed;
+  top: 80%;
+  left: calc(50% - 271px / 2);
+
+  width: 270px;
 }
 
-.active {
-  background-color: rgba(255, 0, 0, 0.555);
+nav {
+  display: flex;
+  justify-content: left;
+  width: 271px;
+  margin: 0;
 }
 
-button {
-  margin: 3px;
+.right,
+.left {
+  font-size: 24px;
+  line-height: 10px;
+}
+
+.left {
+  transform: rotate(180deg);
+  font-size: 24px;
+}
+
+.dots {
+  display: inline-block;
+  transform: translateY(10px);
+}
+
+@media screen and (max-width: 500px) {
+  .pagination {
+  }
 }
