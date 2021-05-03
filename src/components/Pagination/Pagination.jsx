@@ -1,4 +1,8 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+
 import './Pagination.css';
 
 export const Pagination = ({
@@ -14,23 +18,52 @@ export const Pagination = ({
   }
 
   const changePage = (e) => {
-    if (e.target.name === 'left') {
-      const pageDicriment = page - 1 >= 1 ? page - 1 : 1;
-      onClick(pageDicriment);
+    if (e.target.closest('button').name === 'left') {
+      const pageDecrease = page - 1 >= 1 ? page - 1 : 1;
+      onClick(pageDecrease);
     } else {
-      const pageIncriment = page + 1 <= pageNumbers.length - 1
+      const pageIncrease = page + 1 <= pageNumbers.length - 1
         ? page + 1
         : pageNumbers.length;
-      onClick(pageIncriment);
+      onClick(pageIncrease);
     }
+  }
+
+  const renderArrowButton = (name, arrow, isDisable = false) => {
+    if (isDisable) {
+      return (
+        <Button
+          disabled
+          variant="outlined"
+          color="primary"
+          name={name}
+          onClick={(e) => changePage(e)}
+          startIcon={arrow}
+        >
+        </Button>
+      )
+    }
+
+    return (
+      <Button
+        variant="outlined"
+        color="primary"
+        name={name}
+        onClick={(e) => changePage(e)}
+        startIcon={arrow}
+      >
+      </Button>
+    )
   }
 
   return (
     <nav>
       <div className="pagination">
-        <button name="left" onClick={(e) => changePage(e)}>
-          &#10092;
-        </button>
+
+        {(page === 1 &&
+          renderArrowButton('left', <ArrowBackIosIcon />, true)) ||
+          renderArrowButton('left', <ArrowBackIosIcon />)}
+
         {pageNumbers.map((number, index) => (
           (index === 0
             || index === page - 2
@@ -39,22 +72,20 @@ export const Pagination = ({
             || index === pageNumbers.length - 1
           ) &&
           <div key={number}>
-            {(number === page - 1 && page > 3) && '...'}
-            <button
-              className={number === page ? 'active' : ''}
-              onClick={() => {
-                console.log(number, ' - number');
-                console.log(page, ' - page');
-                return onClick(number)
-              }}>
+            {(number === page - 1 && page > 3) && <span>...</span>}
+            <Button
+              variant={number === page ? 'contained' : 'outlined'}
+              color={number === page ? 'secondary' : 'primary'}
+              onClick={() => onClick(number)}>
               {number}
-            </button>
-            {(number === page + 1 && page < pageNumbers.length - 2) && '...'}
+            </Button>
+            {(number === page + 1 && page < pageNumbers.length - 2) && <span>&nbsp;. . .&nbsp;</span>}
           </div>
         ))}
-        <button name="right" onClick={(e) => changePage(e)}>
-          &#10093;
-        </button>
+        {(page === pageNumbers.length &&
+          renderArrowButton('right', <ArrowForwardIosIcon />, true)) ||
+          renderArrowButton('right', <ArrowForwardIosIcon />)}
+          }
       </div>
     </nav>
   );

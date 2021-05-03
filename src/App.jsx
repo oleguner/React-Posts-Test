@@ -5,18 +5,22 @@ import './App.css';
 
 export const App = () => {
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(2);
 
   const getPosts = async () => {
-    const response = await fetch('http://dummy.restapiexample.com/api/v1/employees')
+    const posts = await fetch('https://mate-academy.github.io/phone-catalogue-static/api/phones.json').then(resp => resp.json());
+    const users = await fetch('https://mate-academy.github.io/phone-catalogue-static/api/phones.json').then(resp => resp.json());
 
-    if (response.ok) {
-      const json = await response.json();
-      setPosts(json.data);
-    } else {
-      console.log("HTTP error: " + response.status);
-    }
+    const retrieveAll = async function() {
+      const result = await Promise.all([posts, users]);
+      console.log(result);
+      setPosts(result[0]);
+      setPosts(result[1]);
+    };
+
+    retrieveAll();
   }
 
   useEffect(() => {
@@ -24,7 +28,6 @@ export const App = () => {
   }, []);
 
   const handleClick = (page) => {
-    // console.log(page);
     setCurrentPage(page);
   };
 
