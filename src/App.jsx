@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { PostsList } from './components/PostsList/PostsList';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
@@ -37,6 +37,7 @@ export const App = () => {
     if (window.localStorage.posts) {
       setPosts(JSON.parse(localStorage.posts));
       setUsers(JSON.parse(localStorage.users));
+      setSortedPosts(posts);
     } else {
       getPosts();
     }
@@ -44,19 +45,11 @@ export const App = () => {
 
   useEffect(() => {
     setSortedPosts(posts);
-    setSortedUser(users);
-  }, [posts, users]);
+  }, [posts]);
 
   const handleClick = (page) => {
     setCurrentPage(page);
   };
-
-  const handleDeleteClick = (e) => {
-    const postId = Number(e.target.closest('li').dataset.postid);
-    const newPosts = posts.filter(post => post.id !== postId);
-    console.log(newPosts, 'delete click');
-    setPosts(newPosts);
-  }
 
   const handleSortByUser = (user) => {
     if (typeof user === 'string') {
@@ -64,15 +57,38 @@ export const App = () => {
 
       return;
     } else {
+      if (user === 0) {
+        setSortedPosts(posts);
+        pageControl(sortedPosts.length);
+        console.log(currentPage, sortedPosts.length/postPerPage, 'sortedPosts');
+
+        return;
+      }
+
       const sortedByUserName = posts.filter(post => {
         if (post.userId === user) return post;
       });
 
-      setCurrentPage(1);
+      pageControl(sortedByUserName.length);
       setSortedPosts(sortedByUserName);
       setSortedUser(user);
-      console.log(user);
+      console.log(currentPage, sortedByUserName.length/postPerPage, 'sortedByUserName');
+    };
+
+    function pageControl(length) {
+      if (
+        currentPage > Math.round(length / postPerPage)
+      ) {
+        console.log(Math.floor(length / postPerPage), 'pageControl')
+        setCurrentPage(Math.floor(length / postPerPage));
+      }
     }
+  };
+
+  const handleDeleteClick = (id) => {
+    const newPosts = posts.filter(post => post.id !== id);
+    setPosts(newPosts);
+    handleSortByUser(sortedUser);
   };
 
   const lastPostIndexOnThePage = currentPage * postPerPage;

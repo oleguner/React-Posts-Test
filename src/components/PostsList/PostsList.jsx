@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PersonIcon from '@material-ui/icons/Person';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { Modal } from './Modal';
+
 
 import './PostsList.css';
 
 export const PostsList = ({ posts, users, onDelete }) => {
+  const [modalActive, setModalActive] = useState(false);
+  const [postId, setPostId] = useState();
+
+  const handleDelete = (e) => {
+      setModalActive(true);
+      const pages = document.querySelector('.pagination');
+      pages.style.display = 'none';
+
+      const postNum = Number(e.target.closest('li').dataset.postid);
+
+      setPostId(postNum);
+  }
+
   if (posts.length === 0) {
     return <div className="progress">
       <CircularProgress style={{ color: '#2B62D7' }} />
     </div>
   }
-
-  /* const handleDeleteClick = (e) => {
-    const postId = e.target.closest('li').dataset.postid;
-    console.log(postId, 'delete click');
-  } */
 
   return (
     <ul>
@@ -33,11 +43,20 @@ export const PostsList = ({ posts, users, onDelete }) => {
           </h4>
           <h3 className="post__title">{post.title}</h3>
           <p className="post__body">{post.body}</p>
-          <div className="post__delete" onClick={onDelete}>
+          <div
+            className="post__delete"
+            onClick={(e) => handleDelete(e)}
+          >
             <DeleteForeverIcon />
           </div>
         </li>
       ))}
+      <Modal
+        active={modalActive}
+        setActive={setModalActive}
+        onDelete={onDelete}
+        postId={postId}
+      />
     </ul>
   );
 };

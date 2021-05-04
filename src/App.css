@@ -24,6 +24,10 @@ main {
   margin: 0;
 }
 
+main {
+  min-height: 500px;
+}
+
 .root {
   width: 100%;
 }
