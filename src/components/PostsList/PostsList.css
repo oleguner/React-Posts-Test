@@ -1,29 +1,44 @@
-.list__item {
+.post__item {
+  padding: 10px;
+  position: relative;
+
   list-style-type: none;
   border: 1px solid #111827;
-  padding: 10px;
   background-color: #fff;
   font-size: 18px;
 }
 
-.list__user {
+.post__user {
   display: flex;
   justify-content: left;
   align-items: flex-end;
   margin-top: 0;
 }
 
-.list__user-name {
+.post__user-name {
   transform: translateY(1px);
 }
 
-.list__title::first-letter {
+.post__title::first-letter {
   text-transform: uppercase;
 }
 
-.list__body::first-letter {
+.post__body::first-letter {
   text-transform: uppercase;
   color: #F472B6;
+}
+
+.post__delete {
+  position: absolute;
+  top: 0;
+  right: 1%;
+  opacity: .3;
+  transition: opacity .5s ease-out;
+}
+
+.post__delete:hover {
+  cursor: pointer;
+  opacity: 1;
 }
 
 .progress {

@@ -29,6 +29,7 @@ nav {
 .dots {
   display: inline-block;
   transform: translateY(10px);
+  user-select: none;
 }
 
 @media screen and (max-width: 500px) {

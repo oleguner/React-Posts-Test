@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { PostsList } from './components/PostsList/PostsList';
-import { Pagination } from './components/Pagination/Pagination';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { message } from './main';
+
 import './App.css';
 
 export const App = () => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [sortedPosts, setSortedPosts] = useState([]);
+  const [sortedUser, setSortedUser] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(6);
 
@@ -40,27 +42,60 @@ export const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+    setSortedPosts(posts);
+    setSortedUser(users);
+  }, [posts, users]);
+
   const handleClick = (page) => {
     setCurrentPage(page);
   };
 
+  const handleDeleteClick = (e) => {
+    const postId = Number(e.target.closest('li').dataset.postid);
+    const newPosts = posts.filter(post => post.id !== postId);
+    console.log(newPosts, 'delete click');
+    setPosts(newPosts);
+  }
+
+  const handleSortByUser = (user) => {
+    if (typeof user === 'string') {
+      setSortedPosts(posts);
+
+      return;
+    } else {
+      const sortedByUserName = posts.filter(post => {
+        if (post.userId === user) return post;
+      });
+
+      setCurrentPage(1);
+      setSortedPosts(sortedByUserName);
+      setSortedUser(user);
+      console.log(user);
+    }
+  };
+
   const lastPostIndexOnThePage = currentPage * postPerPage;
   const firstPostIndexOnThePage = lastPostIndexOnThePage - postPerPage;
-  const displayedPosts = posts.slice(
+  const displayedPosts = sortedPosts.slice(
     firstPostIndexOnThePage,
     lastPostIndexOnThePage
   );
 
   return (
     <>
-      <Header users={users} />
+      <Header users={users} onSorted={handleSortByUser} />
       <main id="main__block">
-        <PostsList posts={displayedPosts} users={users} />
+        <PostsList
+          posts={displayedPosts}
+          users={users}
+          onDelete={handleDeleteClick}
+        />
 
       </main>
       <Footer
         postsPerPage={postPerPage}
-        postsLength={posts.length}
+        postsLength={sortedPosts.length}
         onClick={handleClick}
         page={currentPage}
       >

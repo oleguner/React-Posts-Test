@@ -25,3 +25,10 @@
     #4F46E5 100%
   );
 }
+
+@media screen and (max-width: 500px) {
+  .footer {
+    height: 63px;
+    border-radius:75% 75% 0 0 / 10%;
+  }
+}

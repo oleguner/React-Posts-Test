@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -14,15 +14,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Header = ({ users }) => {
+export const Header = ({ users, onSorted }) => {
   const classes = useStyles();
   const [user, setUser] = useState('All Users');
-
-  console.log(user);
 
   const handleChange = (event) => {
     setUser(event.target.value);
   };
+
+  useEffect(() => {
+    if (user !== 'All Users') {
+      const person = users.find(human => human.name === user);
+      onSorted(person.id);
+    } else {
+      onSorted(user);
+    }
+  }, [user]);
 
   return (
     <header className="header">

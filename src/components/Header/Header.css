@@ -35,3 +35,15 @@
   color: #FFF;
   font-size: 36px;
 }
+
+@media screen and (max-width: 500px) {
+  /* .header__overlay {
+    display: block;
+    justify-content: left;
+    align-items: flex-end;
+  } */
+
+  .header__users {
+    margin-left: 0;
+  }
+}
