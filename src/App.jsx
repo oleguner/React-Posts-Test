@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { PostsList } from './components/PostsList/PostsList';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
@@ -10,7 +10,7 @@ export const App = () => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [sortedPosts, setSortedPosts] = useState([]);
-  const [sortedUser, setSortedUser] = useState(0);
+  const [selectedUser, setSelectedUser] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(6);
 
@@ -45,50 +45,47 @@ export const App = () => {
 
   useEffect(() => {
     setSortedPosts(posts);
-  }, [posts]);
+    handleSortByUser();
+  }, [posts, selectedUser]);
 
   const handleClick = (page) => {
     setCurrentPage(page);
   };
 
-  const handleSortByUser = (user) => {
-    if (typeof user === 'string') {
+  const handleSortByUser = () => {
+    if (typeof selectedUser === 'string' || selectedUser === 0) {
       setSortedPosts(posts);
 
       return;
     } else {
-      if (user === 0) {
-        setSortedPosts(posts);
-        pageControl(sortedPosts.length);
-        console.log(currentPage, sortedPosts.length/postPerPage, 'sortedPosts');
+      const sortedByUser = posts.filter(post =>
+        post.userId === selectedUser);
 
-        return;
+      if (currentPage > Math.ceil(sortedByUser.length / postPerPage)) {
+        setCurrentPage(Math.trunc(sortedByUser.length / postPerPage));
       }
-
-      const sortedByUserName = posts.filter(post => {
-        if (post.userId === user) return post;
-      });
-
-      pageControl(sortedByUserName.length);
-      setSortedPosts(sortedByUserName);
-      setSortedUser(user);
-      console.log(currentPage, sortedByUserName.length/postPerPage, 'sortedByUserName');
+      setSortedPosts(sortedByUser);
+      setSelectedUser(selectedUser);
     };
+  };
 
-    function pageControl(length) {
-      if (
-        currentPage > Math.round(length / postPerPage)
-      ) {
-        console.log(Math.floor(length / postPerPage), 'pageControl')
-        setCurrentPage(Math.floor(length / postPerPage));
-      }
+  const handleSearch = (text) => {
+    const lowerCaseText = text.toLowerCase();
+
+    const sortedBySearch = posts.filter(post =>
+      post.body.includes(lowerCaseText)
+      || post.title.includes(lowerCaseText));
+
+    setSortedPosts(sortedBySearch);
+
+    if (currentPage > Math.ceil(sortedBySearch.length / postPerPage)) {
+      setCurrentPage(Math.trunc(sortedBySearch.length / postPerPage));
     }
   };
 
   const handleDeleteClick = (id) => {
     const newPosts = posts.filter(post => post.id !== id);
     setPosts(newPosts);
-    handleSortByUser(sortedUser);
   };
 
   const lastPostIndexOnThePage = currentPage * postPerPage;
@@ -100,7 +97,11 @@ export const App = () => {
 
   return (
     <>
-      <Header users={users} onSorted={handleSortByUser} />
+      <Header
+        users={users}
+        onSorted={setSelectedUser}
+        onSearch={handleSearch}
+      />
       <main id="main__block">
         <PostsList
           posts={displayedPosts}
