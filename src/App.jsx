@@ -13,7 +13,6 @@ export const App = () => {
   const [postPerPage, setPostPerPage] = useState(6);
 
   const getPosts = async () => {
-    console.log('getPosts');
     const posts = await fetch(
       'https://jsonplaceholder.typicode.com/posts'
     ).then(resp => resp.json());
@@ -33,7 +32,6 @@ export const App = () => {
   }
 
   useEffect(() => {
-    console.log(window.localstorage);
     if (window.localStorage.posts) {
       setPosts(JSON.parse(localStorage.posts));
       setUsers(JSON.parse(localStorage.users));
@@ -46,18 +44,18 @@ export const App = () => {
     setCurrentPage(page);
   };
 
-  const lastIndexPostOnThePage = currentPage * postPerPage;
-  const firstIndexPostOnThePage = lastIndexPostOnThePage - postPerPage;
+  const lastPostIndexOnThePage = currentPage * postPerPage;
+  const firstPostIndexOnThePage = lastPostIndexOnThePage - postPerPage;
   const displayedPosts = posts.slice(
-    firstIndexPostOnThePage,
-    lastIndexPostOnThePage
+    firstPostIndexOnThePage,
+    lastPostIndexOnThePage
   );
 
   return (
     <>
-      <Header />
+      <Header users={users} />
       <main id="main__block">
-        <PostsList posts={displayedPosts} />
+        <PostsList posts={displayedPosts} users={users} />
 
       </main>
       <Footer

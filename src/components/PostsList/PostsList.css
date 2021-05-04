@@ -6,6 +6,17 @@
   font-size: 18px;
 }
 
+.list__user {
+  display: flex;
+  justify-content: left;
+  align-items: flex-end;
+  margin-top: 0;
+}
+
+.list__user-name {
+  transform: translateY(1px);
+}
+
 .list__title::first-letter {
   text-transform: uppercase;
 }

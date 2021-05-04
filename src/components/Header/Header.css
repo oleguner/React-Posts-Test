@@ -6,9 +6,14 @@
   background-color: #CFFAFE;
 }
 
+.header__users {
+  margin-left: 60px;
+}
+
 .header__overlay {
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  align-items: flex-end;
 }
 
 .header .header__overlay {
@@ -24,7 +29,9 @@
 }
 
 .header__title {
-  color: #ECFEFF;
-  margin: auto;
+  position: absolute;
+  top: 0;
+  left: calc(50% - 180px / 2);
+  color: #FFF;
   font-size: 36px;
 }

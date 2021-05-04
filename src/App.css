@@ -1,5 +1,5 @@
-h1 {
-  color: red;
+ul {
+  padding: 0;
 }
 
 html {
@@ -9,6 +9,10 @@ html {
 .page {
   margin: 0;
   background-color: #ECFEFF;
+  background-image: url(./images/cssfon.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .root,
@@ -21,7 +25,7 @@ main {
 }
 
 .root {
-  width: 100vw;
+  width: 100%;
 }
 
 main {

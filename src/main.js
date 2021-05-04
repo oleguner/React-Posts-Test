@@ -7,7 +7,7 @@ export function message() {
       text.textContent = 'Posts were loaded from ' + place;
       text.style.position = 'absolute';
       text.style.fontSize = '25px';
-      text.style.color = '#ECFEFF';
+      text.style.color = '#FFF';
       text.style.left = `calc(50% - ${text.offsetWidth}px / 2)`;
       text.style.top = '73%';
       text.style.opacity = '1';
