@@ -8,33 +8,20 @@ import TextField from '@material-ui/core/TextField';
 
 import './Header.css';
 
-// const useStyles = makeStyles((theme) => ({
-//   formControl: {
-//     margin: theme.spacing(1),
-//     minWidth: 120,
-//   },
-//   input: {
-//     color: '#fff',
-//   },
-//   cssLabel: {
-//     color: "#fff",
-//     "&.Mui-focused": {
-//       color: "#fff"
-//     }
-//   },
-//   root: {
-//     '& .MuiFormLabel-root.Mui-disabled': {
-//       color: 'red',
-//     },
-//   },
-// }));
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    "& .MuiFormLabel-root": {
-      color: "red" // or black
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  input: {
+    color: '#fff',
+  },
+  cssLabel: {
+    color: "#fff",
+    "&.Mui-focused": {
+      color: "#fff"
     }
-  }
+  },
 }));
 
 export const Header = ({ users, onSorted, onSearch }) => {
@@ -108,11 +95,8 @@ export const Header = ({ users, onSorted, onSearch }) => {
             onChange={handleSearch}
             value={searchText}
             label="Text search"
-            className={classes.root}
-            InputProps={{ style: { color: '#fff' }, }}
-            InputLabelProps={{
-              style: { color: '#fff' },
-            }}
+            InputProps={{ className: classes.input }}
+            InputLabelProps={{ classes: { root: classes.cssLabel, } }}
           />
 
         </div>

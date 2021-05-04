@@ -44,12 +44,6 @@
   right: 0;
 }
 
-.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: #fff !important;
-}
-
-.MuiFormLabel-root .MuiInputLabel-root .MuiInputLabel-formControl .MuiInputLabel-animated .MuiInputLabel-shrink .MuiInputLabel-outlined .MuiFormLabel-filled { color:red!important;}
-
 @media screen and (max-width: 500px) {
   .header__title {
     font-size: 24px;
