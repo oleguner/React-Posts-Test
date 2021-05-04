@@ -45,11 +45,13 @@
 }
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: yellow !important;
+  border-color: #fff !important;
 }
 
-/* @media screen and (max-width: 500px) {
-  .header__users {
-    margin-left: 0;
+.MuiFormLabel-root .MuiInputLabel-root .MuiInputLabel-formControl .MuiInputLabel-animated .MuiInputLabel-shrink .MuiInputLabel-outlined .MuiFormLabel-filled { color:red!important;}
+
+@media screen and (max-width: 500px) {
+  .header__title {
+    font-size: 24px;
   }
-} */
+}

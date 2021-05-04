@@ -37,3 +37,17 @@ main {
   width: 75%;
   align-items: left;
 }
+
+.warning {
+  width: 302px;
+  height: 202px;
+  background-color: rgba(246, 125, 125);
+  position: absolute;
+  top: calc(50% - 202px / 2);
+  left: calc(50% - 302px / 2);
+  background-image: url(./images/wat.jpg);
+  background-position: center;
+  background-size: cover;
+  border-radius: 8px;
+  z-index: 3;
+}

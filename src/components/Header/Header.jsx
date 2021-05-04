@@ -8,20 +8,33 @@ import TextField from '@material-ui/core/TextField';
 
 import './Header.css';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  input: {
-    color: '#fff',
-  },
-  cssLabel: {
-    color: "#fff",
-    "&.Mui-focused": {
-      color: "#fff"
+// const useStyles = makeStyles((theme) => ({
+//   formControl: {
+//     margin: theme.spacing(1),
+//     minWidth: 120,
+//   },
+//   input: {
+//     color: '#fff',
+//   },
+//   cssLabel: {
+//     color: "#fff",
+//     "&.Mui-focused": {
+//       color: "#fff"
+//     }
+//   },
+//   root: {
+//     '& .MuiFormLabel-root.Mui-disabled': {
+//       color: 'red',
+//     },
+//   },
+// }));
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    "& .MuiFormLabel-root": {
+      color: "red" // or black
     }
-  },
+  }
 }));
 
 export const Header = ({ users, onSorted, onSearch }) => {
@@ -36,6 +49,7 @@ export const Header = ({ users, onSorted, onSearch }) => {
   const handleSearch = (event) => {
     setSearchText(event.target.value);
     onSearch(event.target.value);
+    console.log(event.key);
   };
 
   useEffect(() => {
@@ -92,9 +106,13 @@ export const Header = ({ users, onSorted, onSearch }) => {
 
           <TextField
             onChange={handleSearch}
+            value={searchText}
             label="Text search"
-            InputProps={{ className: classes.input }}
-            InputLabelProps={{ classes: { root: classes.cssLabel, } }}
+            className={classes.root}
+            InputProps={{ style: { color: '#fff' }, }}
+            InputLabelProps={{
+              style: { color: '#fff' },
+            }}
           />
 
         </div>

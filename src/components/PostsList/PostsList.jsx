@@ -2,23 +2,39 @@ import React, { useState } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PersonIcon from '@material-ui/icons/Person';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 import { Modal } from './Modal';
+import { ModalEdit } from './ModalEdit';
 
 
 import './PostsList.css';
 
-export const PostsList = ({ posts, users, onDelete }) => {
-  const [modalActive, setModalActive] = useState(false);
+export const PostsList = ({ posts, users, onDelete, onEdit }) => {
+  const [modalDelete, setModalDelete] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
   const [postId, setPostId] = useState();
+  const [postText, setPostText] = useState();
 
   const handleDelete = (e) => {
-      setModalActive(true);
-      const pages = document.querySelector('.pagination');
-      pages.style.display = 'none';
+    setModalDelete(true);
+    const pages = document.querySelector('.pagination');
+    pages.style.display = 'none';
 
-      const postNum = Number(e.target.closest('li').dataset.postid);
+    const postNum = Number(e.target.closest('li').dataset.postid);
 
-      setPostId(postNum);
+    setPostId(postNum);
+  }
+
+  const handleEdit = (e) => {
+    setModalEdit(true);
+
+    const pages = document.querySelector('.pagination');
+    pages.style.display = 'none';
+
+    const text = e.target.closest('li').querySelector('p').textContent;
+    const postNum = Number(e.target.closest('li').dataset.postid);
+    setPostId(postNum);
+    setPostText(text);
   }
 
   if (posts.length === 0) {
@@ -43,19 +59,35 @@ export const PostsList = ({ posts, users, onDelete }) => {
           </h4>
           <h3 className="post__title">{post.title}</h3>
           <p className="post__body">{post.body}</p>
+
           <div
             className="post__delete"
             onClick={(e) => handleDelete(e)}
           >
             <DeleteForeverIcon />
           </div>
+
+          <div
+            className="post__edit"
+            onClick={(e) => handleEdit(e)}
+          >
+            <EditIcon />
+          </div>
+
         </li>
       ))}
       <Modal
-        active={modalActive}
-        setActive={setModalActive}
+        active={modalDelete}
+        setActive={setModalDelete}
         onDelete={onDelete}
         postId={postId}
+      />
+      <ModalEdit
+        active={modalEdit}
+        setActive={setModalEdit}
+        onEdit={onEdit}
+        postId={postId}
+        postText={postText}
       />
     </ul>
   );

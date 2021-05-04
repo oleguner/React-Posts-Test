@@ -70,6 +70,10 @@ export const App = () => {
   };
 
   const handleSearch = (text) => {
+    if (document.querySelector('.warning')) {
+      document.querySelector('.warning').remove();
+    }
+
     const lowerCaseText = text.toLowerCase();
 
     const sortedBySearch = posts.filter(post =>
@@ -77,15 +81,31 @@ export const App = () => {
       || post.title.includes(lowerCaseText));
 
     setSortedPosts(sortedBySearch);
-
     if (currentPage > Math.ceil(sortedBySearch.length / postPerPage)) {
       setCurrentPage(Math.trunc(sortedBySearch.length / postPerPage));
+    }
+
+    if (sortedBySearch.length === 0) {
+
+      const zeroFound = document.createElement('div');
+      const main = document.querySelector('main');
+
+      zeroFound.className = 'warning';
+      main.append(zeroFound);
+      setCurrentPage(1);
     }
   };
 
   const handleDeleteClick = (id) => {
     const newPosts = posts.filter(post => post.id !== id);
     setPosts(newPosts);
+  };
+
+  const handleEdit = (text, id) => {
+    const editedPost = posts.find(post => post.id === id);
+    editedPost.body = text;
+    posts.splice(id - 1, 1, editedPost);
+    setPosts(posts);
   };
 
   const lastPostIndexOnThePage = currentPage * postPerPage;
@@ -107,6 +127,7 @@ export const App = () => {
           posts={displayedPosts}
           users={users}
           onDelete={handleDeleteClick}
+          onEdit={handleEdit}
         />
 
       </main>

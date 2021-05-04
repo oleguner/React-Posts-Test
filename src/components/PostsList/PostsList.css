@@ -28,7 +28,8 @@
   color: #F472B6;
 }
 
-.post__delete {
+.post__delete,
+.post__edit {
   position: absolute;
   top: 0;
   right: 1%;
@@ -36,9 +37,14 @@
   transition: opacity .5s ease-out;
 }
 
-.post__delete:hover {
+.post__delete:hover,
+.post__edit:hover {
   cursor: pointer;
   opacity: 1;
+}
+
+.post__edit {
+  top: 25px;
 }
 
 .progress {
