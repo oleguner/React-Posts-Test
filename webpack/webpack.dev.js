@@ -5,4 +5,4 @@ module.exports = {
     hot: true,
     open: true,
   }
-}
+};

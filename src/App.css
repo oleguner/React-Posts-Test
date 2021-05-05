@@ -1,3 +1,53 @@
-h1 {
-  color: red;
+ul {
+  padding: 0;
+}
+
+html {
+  color: #111827;
+}
+
+.page {
+  margin: 0;
+  background-color: #ECFEFF;
+  background-image: url(./images/cssfon.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.root,
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+}
+
+main {
+  min-height: 500px;
+}
+
+.root {
+  width: 100%;
+}
+
+main {
+  margin: 0;
+  width: 75%;
+  align-items: left;
+}
+
+.warning {
+  width: 302px;
+  height: 202px;
+  background-color: rgba(246, 125, 125);
+  position: absolute;
+  top: calc(50% - 202px / 2);
+  left: calc(50% - 302px / 2);
+  background-image: url(./images/wat.jpg);
+  background-position: center;
+  background-size: cover;
+  border-radius: 8px;
+  z-index: 3;
 }

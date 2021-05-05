@@ -1,0 +1,38 @@
+.pagination {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 3%;
+  /* right: calc(50% - 270px / 2); */
+
+  width: 270px;
+}
+
+nav {
+  display: flex;
+  justify-content: left;
+  width: 271px;
+  margin: 0;
+}
+
+.right,
+.left {
+  font-size: 24px;
+  line-height: 10px;
+}
+
+.left {
+  transform: rotate(180deg);
+  font-size: 24px;
+}
+
+.dots {
+  display: inline-block;
+  transform: translateY(10px);
+  user-select: none;
+}
+
+@media screen and (max-width: 500px) {
+  .pagination {
+  }
+}
