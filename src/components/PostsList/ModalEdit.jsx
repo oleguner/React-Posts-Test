@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import './ModalEdit.css';
 
+import PropTypes from 'prop-types';
+
 const useStyles = makeStyles({
   root: {
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
@@ -96,3 +98,11 @@ export const ModalEdit = ({
     </div>
   );
 };
+
+ModalEdit.propTypes = {
+  active: PropTypes.bool.isRequired,
+  setActive: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  postId: PropTypes.number,
+  postText: PropTypes.string,
+}

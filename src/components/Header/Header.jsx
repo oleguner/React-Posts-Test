@@ -7,6 +7,8 @@ import { UserSelect } from './UserSelect';
 
 import './Header.css';
 
+import PropTypes from 'prop-types';
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -29,7 +31,7 @@ export const Header = ({
   const classes = useStyles();
 
 
-  const handleAdd = () => {
+  const handleModalAdd = () => {
     setModalAdd(true);
   }
 
@@ -39,6 +41,7 @@ export const Header = ({
   };
 
   useEffect(() => {
+    console.log(user)
     if (user !== 'All Users') {
       const person = users.find(human => human.name === user);
       onSorted(person.id);
@@ -75,7 +78,7 @@ export const Header = ({
         </div>
 
         <h1 className="header__title">React-Posts</h1>
-        <div className="add-user" onClick={handleAdd}>
+        <div className="add-user" onClick={handleModalAdd}>
           <h2 className="add-user-text">Add a New Post</h2>
           <AddIcon style={{ fontSize: '2rem' }} />
         </div>
@@ -84,11 +87,20 @@ export const Header = ({
         active={modalAdd}
         setActive={setModalAdd}
         users={users}
-        user={user}
-        onUserSet={setUser}
         setPostToAdd={setPostToAdd}
       />
     </header>
   )
 }
 
+Header.propTypes = {
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  onSorted: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  setPostToAdd: PropTypes.func.isRequired,
+}

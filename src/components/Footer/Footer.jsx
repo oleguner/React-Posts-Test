@@ -2,6 +2,8 @@ import React from 'react';
 import { Pagination } from '../Pagination/Pagination';
 import './Footer.css';
 
+import PropTypes from 'prop-types';
+
 export const Footer = ({
   postsPerPage,
   postsLength,
@@ -19,3 +21,10 @@ export const Footer = ({
     </div>
   </footer>
 )
+
+Footer.propTypes = {
+  postsPerPage: PropTypes.number.isRequired,
+  postsLength: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+}

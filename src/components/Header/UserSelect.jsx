@@ -5,6 +5,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import PropTypes from 'prop-types';
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -19,7 +21,6 @@ export const UserSelect = ({
   users,
   onUserSet,
   user,
-  color = '#fff'
 }) => {
   const classes = useStyles();
 
@@ -31,7 +32,7 @@ export const UserSelect = ({
     <FormControl className={classes.formControl}>
       <InputLabel
         id="demo-simple-select-label"
-        style={{ color: color }}
+        style={{ color: '#fff' }}
       >
         Users
     </InputLabel>
@@ -39,7 +40,7 @@ export const UserSelect = ({
       <Select
         value={user}
         onChange={handleChange}
-        style={{ color: color }}
+        style={{ color: '#fff' }}
         defaultValue="All Users"
       >
         <MenuItem
@@ -64,3 +65,13 @@ export const UserSelect = ({
   );
 };
 
+UserSelect.propTypes = {
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  user: PropTypes.string.isRequired,
+  onUserSet: PropTypes.func.isRequired,
+}

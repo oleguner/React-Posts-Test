@@ -15,6 +15,8 @@ import Typography from '@material-ui/core/Typography';
 
 import './PostsList.css';
 
+import PropTypes from 'prop-types';
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -32,7 +34,12 @@ const useStyles = makeStyles({
   },
 });
 
-export const PostsList = ({ posts, users, onDelete, onEdit }) => {
+export const PostsList = ({
+  posts,
+  users,
+  onDelete,
+  onEdit
+}) => {
   const [modalDelete, setModalDelete] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [postId, setPostId] = useState();
@@ -141,3 +148,22 @@ export const PostsList = ({ posts, users, onDelete, onEdit }) => {
     </ul>
   );
 };
+
+PostsList.propTypes = {
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      userId: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+}

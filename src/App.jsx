@@ -50,6 +50,10 @@ export const App = () => {
   }, [posts, selectedUser]);
 
   const handleAddPost = (obj) => {
+    if (obj.user === 'All Users') {
+      obj.user = users[0].name;
+    }
+
     const userObj = users.find(user =>user.name === obj.user);
     const allId = [];
 

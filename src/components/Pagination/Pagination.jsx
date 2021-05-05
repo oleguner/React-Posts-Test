@@ -1,35 +1,10 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles({
-  buttonStyles: {
-    backgroundColor: "#ECFEFF",
-    color: "#3B82F6",
-    border: "1px solid #3B82F6",
-    width: "10px",
-    minWidth: "30px",
-    minHeight: "30px",
-    "&:hover": {
-      backgroundColor: "#DBEAFE",
-    },
-  },
-  buttonActive: {
-    backgroundColor: "#F9A8D4",
-    border: "1px solid #F9A8D4",
-    color: "#3B82F6",
-    width: "10px",
-    minWidth: "30px",
-    minHeight: "30px",
-    transform: "translateY(-5px)",
-    '&:hover': {
-      backgroundColor: '#F472B6',
-      border: '1px solid #AFAFAF',
-    },
-  }
-});
+import { useStyles } from './useStyles';
 
 import './Pagination.css';
+
+import PropTypes from 'prop-types';
 
 export const Pagination = ({
   postsPerPage,
@@ -130,3 +105,10 @@ export const Pagination = ({
     </nav>
   );
 };
+
+Pagination.propTypes = {
+  postsPerPage: PropTypes.number.isRequired,
+  postsLength: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+}

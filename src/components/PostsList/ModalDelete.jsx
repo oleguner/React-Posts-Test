@@ -2,7 +2,14 @@ import React from 'react';
 
 import './ModalDelete.css';
 
-export const ModalDelete = ({ active, setActive, onDelete, postId }) => {
+import PropTypes from 'prop-types';
+
+export const ModalDelete = ({
+  active,
+  setActive,
+  onDelete,
+  postId
+}) => {
   const canselModalWindow = () => {
     const pages = document.querySelector('.pagination');
     pages.style.display = 'flex';
@@ -47,3 +54,10 @@ export const ModalDelete = ({ active, setActive, onDelete, postId }) => {
     </div>
   );
 };
+
+ModalDelete.propTypes = {
+  active: PropTypes.bool.isRequired,
+  setActive: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  postId: PropTypes.number,
+}
