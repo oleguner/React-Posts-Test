@@ -4,6 +4,12 @@ export function message() {
       const text = document.getElementById('header__message');
       const place = (window.localStorage.posts && ' localstorage')
         || ' jsonplaceholder.com';
+      const headerSearch = document.querySelector('.header__search');
+      const headerUsers = document.querySelector('.header__users');
+
+      headerSearch.style.transition = '5s ease-out 0.5s';
+      headerUsers.style.transition = '5s ease-out 0.5s';
+
       text.textContent = 'Posts were loaded from ' + place;
       text.style.position = 'absolute';
       text.style.fontSize = '25px';
@@ -17,6 +23,8 @@ export function message() {
       setTimeout(() => {
         text.style.top = '-10%';
         text.style.opacity = '0';
+        headerSearch.style.opacity = '1';
+        headerUsers.style.opacity = '1';
       }, 2000);
 
       setTimeout(() => {

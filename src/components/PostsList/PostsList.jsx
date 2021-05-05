@@ -3,7 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import PersonIcon from '@material-ui/icons/Person';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
-import { Modal } from './Modal';
+import { ModalDelete } from './ModalDelete';
 import { ModalEdit } from './ModalEdit';
 
 
@@ -76,7 +76,7 @@ export const PostsList = ({ posts, users, onDelete, onEdit }) => {
 
         </li>
       ))}
-      <Modal
+      <ModalDelete
         active={modalDelete}
         setActive={setModalDelete}
         onDelete={onDelete}

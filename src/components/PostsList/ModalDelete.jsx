@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './Modal.css';
+import './ModalDelete.css';
 
-export const Modal = ({ active, setActive, onDelete, postId }) => {
+export const ModalDelete = ({ active, setActive, onDelete, postId }) => {
   const canselModalWindow = () => {
     const pages = document.querySelector('.pagination');
     pages.style.display = 'flex';

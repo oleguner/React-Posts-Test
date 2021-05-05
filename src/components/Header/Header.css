@@ -8,6 +8,7 @@
 
 .header__users {
   margin-left: 0px;
+  opacity: 0;
 }
 
 .header__overlay {
@@ -35,17 +36,24 @@
   left: calc(50% - 180px / 2);
   color: #FFF;
   font-size: 36px;
-  float: left;
 }
 
 .header__search {
   position: absolute;
   top: 45%;
   right: 0;
+  opacity: 0;
 }
 
 .textField__label {
   color: #fff !important;
+}
+
+.add-user {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
