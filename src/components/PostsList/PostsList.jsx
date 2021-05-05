@@ -61,8 +61,6 @@ export const PostsList = ({ posts, users, onDelete, onEdit }) => {
 
     const postNum = Number(e.target.closest('li').dataset.postid);
 
-    console.log(postNum, text);
-
     setPostId(postNum);
     setPostText(text);
   }

@@ -11,6 +11,7 @@
   background-color: rgba(0, 0, 0, .4);
   transform: scale(0);
   transition: .3s;
+  z-index: 3;
 }
 
 .modal__content {
@@ -50,7 +51,7 @@
 
 .modal__yes {
   background-color: #F9A8D4;
-  transition: background-color 1s ease-out;
+  transition: background-color .3s ease-out;
 }
 
 .modal__yes:hover {
@@ -59,7 +60,7 @@
 
 .modal__no {
   background-color: #2bf81c9b;
-  transition: background-color 1s ease-out;
+  transition: background-color .3s ease-out;
 }
 
 .modal__no:hover {

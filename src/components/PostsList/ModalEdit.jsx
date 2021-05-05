@@ -18,7 +18,8 @@ const useStyles = makeStyles({
   }
 });
 
-export const ModalEdit = ({ active,
+export const ModalEdit = ({
+  active,
   setActive,
   onEdit,
   postId,
@@ -28,8 +29,8 @@ export const ModalEdit = ({ active,
   const [postBody, setPostBody] = useState(postText);
 
   useEffect(() => {
-    console.log(postBody);
-  }, [postBody]);
+    setPostBody(postText);
+  }, [postText]);
 
   const canselModalWindow = () => {
     const pages = document.querySelector('.pagination');
@@ -49,8 +50,6 @@ export const ModalEdit = ({ active,
     if (e.key === 'Escape' || e.key === 'Esc') {
       canselModalWindow();
     }
-    const pages = document.querySelector('.pagination');
-    pages.style.display = 'flex';
   }
 
   return (
@@ -87,7 +86,6 @@ export const ModalEdit = ({ active,
             type="button"
             className="modal__yes"
             onClick={() => {
-              console.log(postBody);
               canselModalWindow();
             }}
           >

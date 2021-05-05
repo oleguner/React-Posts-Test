@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { PostsList } from './components/PostsList/PostsList';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
@@ -49,11 +49,32 @@ export const App = () => {
     handleSortByUser();
   }, [posts, selectedUser]);
 
+  const handleAddPost = (obj) => {
+    const userObj = users.find(user =>user.name === obj.user);
+    const allId = [];
+
+    for (let i = 0; i < posts.length; i++) {
+      allId.push(posts[i].id);
+    }
+
+    allId.sort((first, next) => first < next);
+    const newPostId = allId[allId.length - 1] + 1;
+
+    const newPost = {
+      userId: userObj.id,
+      id: newPostId,
+      title: obj.title,
+      body: obj.body,
+    }
+
+    setPosts([...posts, newPost])
+  }
+
   const handleClick = (page) => {
     setCurrentPage(page);
   };
 
-  const handleSortByUser = () => {
+  const handleSortByUser = useCallback(() => {
     if (typeof selectedUser === 'string' || selectedUser === 0) {
       setSortedPosts(posts);
 
@@ -68,9 +89,9 @@ export const App = () => {
       setSortedPosts(sortedByUser);
       setSelectedUser(selectedUser);
     };
-  };
+  }, [posts, selectedUser]);
 
-  const handleSearch = (text) => {
+  const handleSearch = useCallback((text) => {
     if (document.querySelector('.warning')) {
       document.querySelector('.warning').remove();
     }
@@ -95,7 +116,7 @@ export const App = () => {
       main.append(zeroFound);
       setCurrentPage(1);
     }
-  };
+  }, [posts, postPerPage]);
 
   const handleDeleteClick = (id) => {
     const newPosts = posts.filter(post => post.id !== id);
@@ -123,6 +144,7 @@ export const App = () => {
         users={users}
         onSorted={setSelectedUser}
         onSearch={handleSearch}
+        setPostToAdd={handleAddPost}
       />
       <main id="main__block">
         <PostsList

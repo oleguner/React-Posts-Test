@@ -9,6 +9,9 @@
 .header__users {
   margin-left: 0px;
   opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header__overlay {
@@ -32,17 +35,10 @@
 
 .header__title {
   position: absolute;
-  top: 0;
-  left: calc(50% - 180px / 2);
+  top: -25%;
+  right: 1%;
   color: #FFF;
   font-size: 36px;
-}
-
-.header__search {
-  position: absolute;
-  top: 45%;
-  right: 0;
-  opacity: 0;
 }
 
 .textField__label {
@@ -50,14 +46,43 @@
 }
 
 .add-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 50%;
+  right: 0.5%;
+
   cursor: pointer;
+  background-color: #2bf81c9b;
+  border: 2px transparent solid;
+  border-radius: 8px;
+  font-size: 12px;
+  box-shadow: 2px 2px 2px #000;
+  transition: background-color .3s ease-out;
+}
+
+.add-user:hover {
+  text-shadow: 1px 1px 2px rgb(17, 1, 1);
+  background-color: #04b80d;
+}
+
+.add-user:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.add-user-text {
+  margin: 11px;
 }
 
 @media screen and (max-width: 500px) {
   .header__title {
+    top: -15%;
     font-size: 24px;
+  }
+
+  .add-user-text {
+    display: none;
   }
 }
