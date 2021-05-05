@@ -44,6 +44,7 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
+    window.localStorage.setItem('posts', JSON.stringify(posts))
     setSortedPosts(posts);
     handleSortByUser();
   }, [posts, selectedUser]);
@@ -106,6 +107,7 @@ export const App = () => {
     editedPost.body = text;
     posts.splice(id - 1, 1, editedPost);
     setPosts(posts);
+    window.localStorage.setItem('posts', JSON.stringify(posts))
   };
 
   const lastPostIndexOnThePage = currentPage * postPerPage;

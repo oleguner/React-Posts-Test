@@ -16,12 +16,6 @@ const useStyles = makeStyles((theme) => ({
   input: {
     color: '#fff',
   },
-  cssLabel: {
-    color: "#fff",
-    "&.Mui-focused": {
-      color: "#fff"
-    }
-  },
 }));
 
 export const Header = ({ users, onSorted, onSearch }) => {
@@ -95,8 +89,9 @@ export const Header = ({ users, onSorted, onSearch }) => {
             onChange={handleSearch}
             value={searchText}
             label="Text search"
+            className="text-field"
             InputProps={{ className: classes.input }}
-            InputLabelProps={{ classes: { root: classes.cssLabel, } }}
+            InputLabelProps={{ className: 'textField__label' }}
           />
 
         </div>

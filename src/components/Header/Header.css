@@ -44,6 +44,10 @@
   right: 0;
 }
 
+.textField__label {
+  color: #fff !important;
+}
+
 @media screen and (max-width: 500px) {
   .header__title {
     font-size: 24px;
