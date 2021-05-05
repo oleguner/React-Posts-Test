@@ -10,7 +10,7 @@
 
   background-color: rgba(0, 0, 0, .4);
   transform: scale(0);
-  transition: .5s;
+  transition: .3s;
 }
 
 .modal__content {
@@ -36,18 +36,16 @@
   display: none;
 }
 
-
 .modal__yes,
 .modal__no {
   padding: 10px 20px;
-  margin: 40px;
-  width: 60px;
-  height: 35px;
+  margin: 10px 40px 0;
 
   cursor: pointer;
   border: none;
   border-radius: 8px;
   outline:rgba(229, 233, 12, 0.774);
+  text-transform: uppercase;
 }
 
 .modal__yes {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -25,7 +25,11 @@ export const ModalEdit = ({ active,
   postText
 }) => {
   const classes = useStyles();
-  const [ postBody, setPostBody ] = useState();
+  const [postBody, setPostBody] = useState(postText);
+
+  useEffect(() => {
+    console.log(postBody);
+  }, [postBody]);
 
   const canselModalWindow = () => {
     const pages = document.querySelector('.pagination');
@@ -40,11 +44,10 @@ export const ModalEdit = ({ active,
   const handleEdit = (e) => {
     if (e.key === 'Enter') {
       onEdit(postBody, postId);
-      setActive(false);
+      canselModalWindow();
     }
     if (e.key === 'Escape' || e.key === 'Esc') {
-      console.log('escape')
-      setActive(false);
+      canselModalWindow();
     }
     const pages = document.querySelector('.pagination');
     pages.style.display = 'flex';
@@ -58,7 +61,6 @@ export const ModalEdit = ({ active,
       <div className="modal__content" onClick={handleModalWindow}>
         <TextField
           className={classes.root}
-          rows={3}
           multiline={true}
           value={postBody}
           defaultValue={postText}
@@ -67,9 +69,31 @@ export const ModalEdit = ({ active,
           variant="outlined"
           label="Post changes"
           fullWidth
-          rows="10"
+          rows="7"
+          id="edit"
         />
-        <div className="modal__buttons"></div>
+        <div className="modal__buttons">
+          <button
+            type="button"
+            className="modal__no"
+            onClick={() => {
+              onEdit(postBody, postId);
+              canselModalWindow();
+            }}
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            className="modal__yes"
+            onClick={() => {
+              console.log(postBody);
+              canselModalWindow();
+            }}
+          >
+            Cansel
+          </button>
+        </div>
       </div>
     </div>
   );
